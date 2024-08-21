@@ -1,0 +1,6 @@
+langchain
+faiss-cpu
+langchain_chroma
+langchain_openai
+chromadb
+tiktoken
