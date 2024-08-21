@@ -1,0 +1,3 @@
+venv/
+local_db_data/
+chroma_data/

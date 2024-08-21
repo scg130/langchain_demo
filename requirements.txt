@@ -4,3 +4,5 @@ langchain_chroma
 langchain_openai
 chromadb
 tiktoken
+langchain_community
+bs4

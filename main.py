@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 
 # https://zhuanlan.zhihu.com/p/683550238
-key = ""
+key = "sk-ttJFFNajeLV8y6rtF1iYXAoiNUbtaxcQUpVZIEEwZ7gGHVXY"
 
 llm = ChatOpenAI(api_key=key,model="gpt-3.5-turbo",base_url="https://api.chatanywhere.tech/v1")
 
