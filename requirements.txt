@@ -6,3 +6,5 @@ chromadb
 tiktoken
 langchain_community
 bs4
+weaviate-client
+langchain-weaviate
