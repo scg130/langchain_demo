@@ -2,12 +2,13 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
-
+import chromadb
 
 OPEN_API_KEY = "sk-ttJFFNajeLV8y6rtF1iYXAoiNUbtaxcQUpVZIEEwZ7gGHVXY" 
 embeddings = OpenAIEmbeddings(api_key=OPEN_API_KEY,base_url="https://api.chatanywhere.tech/v1")
 
-docsearch = Chroma(persist_directory="./chroma_data", embedding_function=embeddings)
+cli = chromadb.HttpClient(host='127.0.0.1', port=8000)
+docsearch = Chroma(collection_name="test",persist_directory="./chroma_data", embedding_function=embeddings,client=cli)
 
 qa = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(api_key=OPEN_API_KEY,base_url="https://api.chatanywhere.tech/v1"),

@@ -11,6 +11,9 @@ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 deactivate
 
 
+ 
+# 运行 Chroma 的 Docker 容器
+docker run -d --name chromadb -p 8000:8000 -e IS_PERSISTENT=TRUE -e ANONYMIZED_TELEMETRY=TRUE chromadb/chroma
 
 
 
