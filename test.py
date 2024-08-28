@@ -1,18 +1,22 @@
 from langchain_chroma import Chroma
 import chromadb
+from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
 
-# 配置 Chroma 连接设置（本地持久化设置）
-persist_directory = "./chroma_data"
+OPEN_API_KEY = "sk-ttJFFNajeLV8y6rtF1iYXAoiNUbtaxcQUpVZIEEwZ7gGHVXY" 
+embeddings = OpenAIEmbeddings(api_key=OPEN_API_KEY,base_url="https://api.chatanywhere.tech/v1")
 
 cli = chromadb.HttpClient(host='127.0.0.1', port=8000)
-# 创建 Chroma 实例并配置连接设置
-db = Chroma(
-    collection_name="test",
-    client=cli,
-    persist_directory=persist_directory,
+docsearch = Chroma(collection_name="test",persist_directory="./chroma_data", embedding_function=embeddings,client=cli)
+
+qa = RetrievalQA.from_chain_type(
+    llm=ChatOpenAI(api_key=OPEN_API_KEY,base_url="https://api.chatanywhere.tech/v1"),
+    chain_type="stuff",
+    retriever=docsearch.as_retriever(),
+    return_source_documents=True,
 )
 
+search_query = "weaviate client"
 
-# 打印 Chroma 实例信息
-print(db)
-
+print(qa.invoke(search_query)["result"])
